@@ -6,8 +6,7 @@ public class Word {
     public ArrayList<String> words = new ArrayList<>();
     public String word;
     public ArrayList<String> letters = new ArrayList<>();
-    public ArrayList<String> hiddenWord = new ArrayList<>();
-    public ArrayList<String> guessedLetters = new ArrayList<>();
+    public int livesLost = 0;
 
     public String getWord(String filename, Input input) {
         words = input.readWordsFromFile(filename);
@@ -15,29 +14,31 @@ public class Word {
         return words.get(randomIndex);
     }
 
-    public void getLetters() {
-        for (int i = 0; i < word.length(); i++) {
-            letters.add(String.valueOf(word.charAt(i)));
-        }
 
-    }
+    public char[] createHiddenWord(ArrayList<Character> guessedLetters) {
 
-    public void createHiddenWord(ArrayList<String> guessedLetters) {
         char[] hiddenWord = new char[word.length()];
+        for (int i = 0; i < word.length(); i++) {
+            hiddenWord[i] = '_';
+        }
+        boolean letterFound = false;
         for (int i = 0; i < word.length(); i++) {
             char letter = word.charAt(i);
             for (int j = 0; j < guessedLetters.size(); j++) {
-                if (letter == guessedLetters.get(j).charAt(0)) {
-                    hiddenWord[i] = guessedLetters.get(j).charAt(0);
-                    break;
+                if (letter == guessedLetters.get(j)) {
+                    hiddenWord[i] = letter;
+                    letterFound = true;
                 } else {
-                    hiddenWord[i] = '_';
+                    letterFound = false;
                 }
-
             }
         }
-        System.out.println(hiddenWord);
+        if (!letterFound) {
+            System.out.println("Wrong tray again");
+            livesLost++;
+        } else {
+            System.out.println("well done you've guessed");
+        }
+        return hiddenWord;
     }
-
-
 }

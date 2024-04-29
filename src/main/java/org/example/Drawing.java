@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Drawing {
-    public void drawHangman() {
+    public void drawHangman(String txtFile) {
         ArrayList<String> drawingLines = new ArrayList<>();
         try {
-            File file = new File("src/main/java/Drawing.txt");
+            File file = new File(txtFile);
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

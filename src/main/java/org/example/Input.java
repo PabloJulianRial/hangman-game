@@ -10,7 +10,7 @@ public class Input {
     public Scanner input = new Scanner(System.in);
 
     public char getChar() {
-       
+
         return Character.toUpperCase(input.next().charAt(0));
     }
 
@@ -30,14 +30,23 @@ public class Input {
         return wordsList;
     }
 
-    public void addLetterToGuessedLetters(char input, String wordToGuess, ArrayList<String> guessedLetters) {
+    public void addLetterToGuessedLetters(char input, String wordToGuess, ArrayList<Character> guessedLetters) {
 
         for (int i = 0; i < wordToGuess.length(); i++) {
             if (wordToGuess.charAt(i) == input) {
-                guessedLetters.add(String.valueOf(input));
+                guessedLetters.add(input);
             }
 
         }
+    }
 
+    public void addLetterToMissedLetters(char input, String wordToGuess, ArrayList<Character> missedLetters) {
+
+        for (int i = 0; i < wordToGuess.length(); i++) {
+            if (wordToGuess.charAt(i) != input) {
+                missedLetters.add(input);
+            }
+
+        }
     }
 }
