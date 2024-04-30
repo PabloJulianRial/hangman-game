@@ -6,7 +6,7 @@ public class Word {
     public ArrayList<String> words = new ArrayList<>();
     public String word;
     public ArrayList<String> letters = new ArrayList<>();
-    public int livesLost = 0;
+
 
     public String getWord(String filename, Input input) {
         words = input.readWordsFromFile(filename);
@@ -33,12 +33,7 @@ public class Word {
                 }
             }
         }
-        if (!letterFound) {
-            System.out.println("Wrong tray again");
-            livesLost++;
-        } else {
-            System.out.println("well done you've guessed");
-        }
+
         return hiddenWord;
     }
 }

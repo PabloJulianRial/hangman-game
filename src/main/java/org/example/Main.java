@@ -1,19 +1,18 @@
 package org.example;
 
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-
         Word word = new Word();
         Input userInput = new Input();
         Drawing drawing = new Drawing();
         ArrayList<Character> guessedLetters = new ArrayList<>();
         ArrayList<Character> missedLetters = new ArrayList<>();
         word.word = word.getWord("src/main/java/words.txt", userInput);
-//        System.out.println(word.word);
+        int livesLost = 0;
+        boolean guessed = false;
         boolean isGameFinished = false;
         System.out.println("********************************************************");
         System.out.println("********************* THE HANGMAN **********************");
@@ -23,9 +22,10 @@ public class Main {
         System.out.println("You can exchange a live for a clue of the word ");
         System.out.println("********************** GOOD LUCK! **********************");
         while (!isGameFinished) {
-
             System.out.println("Enter a letter:");
             char inputChar = userInput.getChar();
+//            letterGuessed(inputChar, word.word, guessed);
+
             if (!Character.isLetter(inputChar)) {
                 System.out.println("Please enter only letters, try again.");
             } else if (guessedLetters.contains(inputChar)) {
@@ -37,13 +37,31 @@ public class Main {
                 userInput.addLetterToMissedLetters(inputChar, word.word, missedLetters);
                 System.out.println(word.createHiddenWord(guessedLetters));
                 System.out.println(guessedLetters + "<<<<<<<<<<<<<");
-                drawing.drawHangman("src/main/java/Drawing" + word.livesLost + ".txt");
-                if (word.livesLost >= 6 || guessedLetters.size() == word.word.length()) {
+                if (guessedLetters.contains(inputChar)) {
+                    guessed = true;
+                }
+                if (!guessed) {
+                    livesLost++;
+                    System.out.println("Wrong letter, try again");
+                } else {
+                    System.out.println("Well done, you've guessed");
+                    guessed = false;
+                }
+                drawing.drawHangman("src/main/java/Drawing" + livesLost + ".txt");
+                if (livesLost >= 6 || guessedLetters.size() == word.word.length()) {
                     isGameFinished = true;
                     System.out.println("YOU ARE DEAD!!!!");
                 }
             }
         }
-
     }
+
+//    public static void letterGuessed(char inputChar, String word, boolean guessed) {
+//        inputChar = Character.toLowerCase(inputChar);
+//        if (word.indexOf(inputChar) != -1) {
+//            guessed = true;
+//        } else {
+//            guessed = false;
+//        }
+//    }
 }

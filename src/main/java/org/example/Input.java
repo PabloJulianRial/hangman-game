@@ -30,6 +30,23 @@ public class Input {
         return wordsList;
     }
 
+    public ArrayList<String> readCluesFromFile(String filename) {
+        ArrayList<String> cluesList = new ArrayList<>();
+        try {
+            File file = new File(filename);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String word = scanner.nextLine();
+                cluesList.add(word);
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return cluesList;
+    }
+
+
     public void addLetterToGuessedLetters(char input, String wordToGuess, ArrayList<Character> guessedLetters) {
 
         for (int i = 0; i < wordToGuess.length(); i++) {
