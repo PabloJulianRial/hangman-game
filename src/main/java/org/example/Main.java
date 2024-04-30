@@ -26,8 +26,9 @@ public class Main {
         Drawing drawing = new Drawing();
         ArrayList<Character> guessedLetters = new ArrayList<>();
         ArrayList<Character> missedLetters = new ArrayList<>();
-        word.word = word.getWord("src/main/java/words.txt", userInput);
-        word.clue = word.getClue("src/main/java/clues.txt", userInput);
+        int randomIndex = (int) (Math.random() * 100);
+        word.word = word.getWord(randomIndex, "src/main/java/words.txt", userInput);
+        word.clue = word.getClue(randomIndex, "src/main/java/clues.txt", userInput);
 
         int livesLost = 0;
         boolean guessed = false;
@@ -59,11 +60,12 @@ public class Main {
         while (!isGameFinished) {
             // Input prompt
             System.out.println();
-            printColor("Enter a letter: \n", CYAN);
-            System.out.println();
+
             if (cluesLeft > 0) {
                 printColor("Press '?' to get a hint (you will loose one live)\n", PURPLE);
             }
+            System.out.println();
+            printColor("Enter a letter: \n", CYAN);
             System.out.println();
             char inputChar = userInput.getChar();
             if (!Character.isLetter(inputChar) && inputChar != '?') {
@@ -93,14 +95,14 @@ public class Main {
                 if (guessedLetters.contains(inputChar)) {
                     guessed = true;
                 }
-                if (!guessed && livesLost < 6) {
+                if (!guessed && livesLost < 5) {
                     livesLost++;
                     System.out.println();
                     printColor("Wrong letter, try again.\n", RED);
                     System.out.println();
                     System.out.println("Lives left = " + (6 - livesLost));
                     System.out.println(word.createHiddenWord(guessedLetters));
-                } else if (!guessed && livesLost == 6) {
+                } else if (!guessed && livesLost == 5) {
                     livesLost++;
                     printColor("Wrong letter, sorry, that was your last chance.\n", RED);
                     System.out.println("Lives left = " + (6 - livesLost));
@@ -110,6 +112,7 @@ public class Main {
                     printColor(String.valueOf(inputChar), YELLOW);
                     printColor("' has been revealed below.\n", BLUE);
                     System.out.println(word.createHiddenWord(guessedLetters));
+                    System.out.println();
                     System.out.println("Lives left = " + (6 - livesLost));
                     guessed = false;
                 }
@@ -117,7 +120,24 @@ public class Main {
                 if (livesLost >= 6 || guessedLetters.size() == word.word.length()) {
                     isGameFinished = true;
                     System.out.println("YOU ARE DEAD!!!!");
+                    System.out.println();
+                    printColor("The word was ", BLUE);
+                    printColor(word.word + "\n", YELLOW);
+                    System.out.println();
                     System.out.println("Press 'P' to play again");
+                    inputChar = userInput.getChar();
+                    if (inputChar == 'P') {
+                        isGameFinished = false;
+                        livesLost = 0;
+                        clueGiven = false;
+                        cluesLeft = 1;
+                        guessedLetters.clear();
+                        missedLetters.clear();
+                        int nextRandomIndex = (int) (Math.random() * 100);
+                        word.word = word.getWord(nextRandomIndex, "src/main/java/words.txt", userInput);
+                        word.clue = word.getClue(nextRandomIndex, "src/main/java/clues.txt", userInput);
+                    }
+
                 }
             }
         }

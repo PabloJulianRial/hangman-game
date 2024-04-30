@@ -8,15 +8,15 @@ public class Word {
     public String word;
     public String clue;
     public ArrayList<String> letters = new ArrayList<>();
-    int randomIndex = (int) (Math.random() * 100);
 
-    public String getWord(String filename, Input input) {
+
+    public String getWord(int randomIndex, String filename, Input input) {
         words = input.readWordsFromFile(filename);
         return words.get(randomIndex);
 
     }
 
-    public String getClue(String filename, Input input) {
+    public String getClue(int randomIndex, String filename, Input input) {
         clues = input.readWordsFromFile(filename);
         return clues.get(randomIndex);
     }
