@@ -4,14 +4,21 @@ import java.util.ArrayList;
 
 public class Word {
     public ArrayList<String> words = new ArrayList<>();
+    public ArrayList<String> clues = new ArrayList<>();
     public String word;
+    public String clue;
     public ArrayList<String> letters = new ArrayList<>();
-
+    int randomIndex = (int) (Math.random() * 100);
 
     public String getWord(String filename, Input input) {
         words = input.readWordsFromFile(filename);
-        int randomIndex = (int) (Math.random() * words.size());
         return words.get(randomIndex);
+
+    }
+
+    public String getClue(String filename, Input input) {
+        clues = input.readWordsFromFile(filename);
+        return clues.get(randomIndex);
     }
 
 
