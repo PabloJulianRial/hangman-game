@@ -3,22 +3,20 @@ package org.example;
 import java.util.ArrayList;
 
 public class Word {
-    public ArrayList<String> words = new ArrayList<>();
-    public ArrayList<String> clues = new ArrayList<>();
-    public String word;
-    public String clue;
+    String word;
+    String clue;
 
     public String getWord(int randomIndex, String filename, Input input) {
-        words = input.readWordsFromFile(filename);
+        ArrayList<String> words = input.readWordsFromFile(filename);
         return words.get(randomIndex);
     }
 
-    public String getClue(int randomIndex, String filename, Input input) {
-        clues = input.readWordsFromFile(filename);
+    String getClue(int randomIndex, String filename, Input input) {
+        ArrayList<String> clues = input.readWordsFromFile(filename);
         return clues.get(randomIndex);
     }
 
-    public char[] createHiddenWord(ArrayList<Character> guessedLetters) {
+    char[] createHiddenWord(ArrayList<Character> guessedLetters) {
         char[] hiddenWord = new char[word.length()];
         for (int i = 0; i < word.length(); i++) {
             hiddenWord[i] = '_';

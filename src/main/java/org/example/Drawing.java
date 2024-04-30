@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Drawing {
-    
-    public static final String YELLOW = "\u001B[33m";
 
-    public void drawHangman(String txtFile) {
+    private static final String YELLOW = "\u001B[33m";
+
+    void drawHangman(String txtFile) {
         ArrayList<String> drawingLines = new ArrayList<>();
         try {
             File file = new File(txtFile);

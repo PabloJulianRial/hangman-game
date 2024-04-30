@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Input {
-    public Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
 
-    public char getChar() {
+    char getChar() {
         return Character.toUpperCase(input.next().charAt(0));
     }
 
-    public ArrayList<String> readWordsFromFile(String filename) {
+    ArrayList<String> readWordsFromFile(String filename) {
         ArrayList<String> wordsList = new ArrayList<>();
         try {
             File file = new File(filename);
@@ -28,7 +28,7 @@ public class Input {
         return wordsList;
     }
 
-    public void addLetterToGuessedLetters(char input, String wordToGuess, ArrayList<Character> guessedLetters) {
+    void addLetterToGuessedLetters(char input, String wordToGuess, ArrayList<Character> guessedLetters) {
         for (int i = 0; i < wordToGuess.length(); i++) {
             if (wordToGuess.charAt(i) == input) {
                 guessedLetters.add(input);
@@ -36,7 +36,7 @@ public class Input {
         }
     }
 
-    public void addLetterToMissedLetters(char input, String wordToGuess, ArrayList<Character> missedLetters) {
+    void addLetterToMissedLetters(char input, String wordToGuess, ArrayList<Character> missedLetters) {
         for (int i = 0; i < wordToGuess.length(); i++) {
             if (wordToGuess.charAt(i) != input) {
                 missedLetters.add(input);

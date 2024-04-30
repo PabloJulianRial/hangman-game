@@ -3,31 +3,15 @@ package org.example;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Game game = new Game();
-
-        String GREEN = "\u001B[32m";
-        String YELLOW = "\u001B[33m";
-
-        System.out.println(GREEN + "*****************************************************************************");
-        System.out.print(GREEN + "**************************");
-        System.out.print(YELLOW + " THE HANGMAN ");
-        System.out.println(GREEN + "**************************************");
-        System.out.println(GREEN + "*****************************************************************************");
-        System.out.print(GREEN + "***  ");
-        System.out.print(YELLOW + "-Try to discover the hidden word by guessing it's letters.           ");
-        System.out.println(GREEN + "***");
-        System.out.print(GREEN + "***  ");
-        System.out.print(YELLOW + "-Every time you miss, you loose a life, you have 6 lives.            ");
-        System.out.println(GREEN + "***");
-        System.out.print(GREEN + "***");
-        System.out.print(YELLOW + "  -You can exchange a life for a hint of the word.                     ");
-        System.out.println(GREEN + "***");
-        System.out.println(GREEN + "*****************************************************************************");
-        System.out.print(GREEN + "***************************");
-        System.out.print(YELLOW + " GOOD LUCK! ");
-        System.out.println(GREEN + "**************************************");
-        System.out.println(GREEN + "*****************************************************************************");
-
+        Intro intro = new Intro();
+        intro.printIntro();
         game.playGame();
 
     }
 }
+
+
+
+
+
+

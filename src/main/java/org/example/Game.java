@@ -3,46 +3,41 @@ package org.example;
 import java.util.ArrayList;
 
 public class Game {
+    private final int randomIndex = (int) (Math.random() * 100);
+    ArrayList<Character> guessedLetters = new ArrayList<>();
+    ArrayList<Character> missedLetters = new ArrayList<>();
+    private int livesLost = 0;
+    private boolean guessed = false;
+    private boolean isGameFinished = false;
+    private boolean clueGiven = false;
+    private int cluesLeft = 1;
 
-    public void playGame() throws InterruptedException {
-
-        String RESET = "\u001B[0m";
-        String RED = "\u001B[31m";
-        String YELLOW = "\u001B[33m";
-        String BLUE = "\u001B[34m";
-        String PURPLE = "\u001B[35m";
-        String CYAN = "\u001B[36m";
+    void playGame() throws InterruptedException {
 
         Word word = new Word();
         Input userInput = new Input();
         Drawing drawing = new Drawing();
-
-        ArrayList<Character> guessedLetters = new ArrayList<>();
-        ArrayList<Character> missedLetters = new ArrayList<>();
-
-        int randomIndex = (int) (Math.random() * 100);
-
         word.word = word.getWord(randomIndex, "src/main/java/words.txt", userInput);
         word.clue = word.getClue(randomIndex, "src/main/java/clues.txt", userInput);
-
-        int livesLost = 0;
-        boolean guessed = false;
-        boolean isGameFinished = false;
-        boolean clueGiven = false;
-        int cluesLeft = 1;
 
         while (!isGameFinished) {
             System.out.println();
 
+            String PURPLE = "\u001B[35m";
             if (cluesLeft > 0) {
                 System.out.println(PURPLE + "Enter '?' to get a hint (you will loose one life)");
             }
 
             System.out.println();
+            String CYAN = "\u001B[36m";
             System.out.println(CYAN + "Enter a letter: ");
             System.out.println();
             char inputChar = userInput.getChar();
 
+            String RESET = "\u001B[0m";
+            String RED = "\u001B[31m";
+            String YELLOW = "\u001B[33m";
+            String BLUE = "\u001B[34m";
             if (!Character.isLetter(inputChar) && inputChar != '?') {
                 System.out.println(RED + "Please enter only letters, try again.");
             } else if (guessedLetters.contains(inputChar)) {
